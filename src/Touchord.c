@@ -165,7 +165,18 @@ static void boot_status(const char *stage)
 
 static void log_pin_map(void)
 {
-    tc_debug_logf("i2c pins sda=%u scl=%u", PIN_SDA, PIN_SCL);
+    tc_debug_logf("lcd spi dc=%u cs=%u clk=%u mosi=%u rst=%u bl=%u",
+        LCD_PIN_DC,
+        LCD_PIN_CS,
+        LCD_PIN_CLK,
+        LCD_PIN_MOSI,
+        LCD_PIN_RST,
+        LCD_PIN_BL);
+    tc_debug_logf("trill i2c pins sda=%u scl=%u", PIN_SDA, PIN_SCL);
+    tc_debug_logf("midi pins switch_a=%u switch_b=%u tx=%u",
+        MIDI_PIN_IN_1,
+        MIDI_PIN_IN_2,
+        MIDI_PIN_DAT);
     tc_debug_logf("audio pins bclk=%u din=%u lrclk=%u",
         AUDIO_I2S_BCLK_PIN,
         AUDIO_I2S_DATA_PIN,
@@ -450,7 +461,7 @@ int main()
 
     boot_status("display");
     tc_disp.external_vcc = false;
-    ssd1306_init(&tc_disp, 128, 64, DISP_ADDR, TC_I2C_INSTANCE);
+    ssd1306_init(&tc_disp, LCD_LOGICAL_WIDTH, LCD_LOGICAL_HEIGHT, DISP_ADDR, TC_I2C_INSTANCE);
     ssd1306_contrast(&tc_disp, 0xFF);
     tc_boot_display_ready = true;
     boot_status("display ok");

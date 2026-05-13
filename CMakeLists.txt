@@ -23,7 +23,9 @@ if (EXISTS ${picoVscode})
     include(${picoVscode})
 endif()
 # ====================================================================================
-set(PICO_BOARD waveshare_rp2040_zero CACHE STRING "Board type")
+if(NOT DEFINED PICO_BOARD)
+    set(PICO_BOARD pico2 CACHE STRING "Board type")
+endif()
 
 # Pull in Raspberry Pi Pico SDK (must be before project)
 include(pico_sdk_import.cmake)

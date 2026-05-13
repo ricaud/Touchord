@@ -27,8 +27,8 @@ void setup_midi_trs(MidiType type)
 
     switch_midi_trs(type);
 
+    gpio_set_function(MIDI_PIN_DAT, UART_FUNCSEL_NUM(uart1, MIDI_PIN_DAT));
     uart_init(uart1, MIDI_BAUD_RATE);
-    gpio_set_function(MIDI_PIN_DAT, GPIO_FUNC_UART); //MIDI_PIN_DAT is TX pin
     uart_set_hw_flow(uart1, false, false);
     uart_set_format(uart1, 8, 1, UART_PARITY_NONE);
     uart_set_fifo_enabled(uart1, false);

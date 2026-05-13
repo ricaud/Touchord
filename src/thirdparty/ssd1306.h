@@ -22,10 +22,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-/** 
+/**
 * @file ssd1306.h
 * 
-* simple driver for ssd1306 displays
+* legacy display API retained for Touchord's SPI LCD backend
 */
 
 #ifndef _inc_ssd1306
@@ -60,14 +60,22 @@ typedef enum {
 *	@brief holds the configuration
 */
 typedef struct {
-    uint8_t width; 		/**< width of display */
-    uint8_t height; 	/**< height of display */
+    uint16_t width; 		/**< logical width of display */
+    uint16_t height; 	/**< logical height of display */
     uint8_t pages;		/**< stores pages of display (calculated on initialization*/
     uint8_t address; 	/**< i2c address of display*/
     i2c_inst_t *i2c_i; 	/**< i2c connection instance */
     bool external_vcc; 	/**< whether display uses external vcc */ 
     uint8_t *buffer;	/**< display buffer */
     size_t bufsize;		/**< buffer size */
+    uint16_t physical_width;   /**< physical panel width */
+    uint16_t physical_height;  /**< physical panel height */
+    uint16_t scaled_width;     /**< scaled logical width on panel */
+    uint16_t scaled_height;    /**< scaled logical height on panel */
+    uint16_t scaled_x_offset;  /**< x offset of scaled image */
+    uint16_t scaled_y_offset;  /**< y offset of scaled image */
+    uint16_t fg_color;         /**< RGB565 foreground color */
+    uint16_t bg_color;         /**< RGB565 background color */
 } ssd1306_t;
 
 /**

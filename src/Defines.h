@@ -8,9 +8,18 @@
 #define MIDI_CUTOFF 74
 #define MIDI_MOD 1
 
-#define MIDI_PIN_IN_1 18
-#define MIDI_PIN_IN_2 19
-#define MIDI_PIN_DAT 20
+// The RP2350 LCD board reserves GPIO16-21 for the built-in panel.
+#ifndef MIDI_PIN_IN_1
+#define MIDI_PIN_IN_1 22
+#endif
+
+#ifndef MIDI_PIN_IN_2
+#define MIDI_PIN_IN_2 23
+#endif
+
+#ifndef MIDI_PIN_DAT
+#define MIDI_PIN_DAT 24
+#endif
 #define MIDI_BAUD_RATE 31250
 
 #define DEFAULT_CUTOFF 100
@@ -18,6 +27,55 @@
 #define DEFAULT_DOUBLE_CLICK_MS 300
 #define ENABLE_BOOTSEL_ON_STARTUP 0
 #define ENABLE_BOOTSEL_BUTTON_CHORD 0
+
+// These defaults match the Waveshare RP2350-LCD-1.47 sample project.
+#ifndef LCD_SPI_PORT
+#define LCD_SPI_PORT spi0
+#endif
+
+#ifndef LCD_PIN_DC
+#define LCD_PIN_DC 16
+#endif
+
+#ifndef LCD_PIN_CS
+#define LCD_PIN_CS 17
+#endif
+
+#ifndef LCD_PIN_CLK
+#define LCD_PIN_CLK 18
+#endif
+
+#ifndef LCD_PIN_MOSI
+#define LCD_PIN_MOSI 19
+#endif
+
+#ifndef LCD_PIN_RST
+#define LCD_PIN_RST 20
+#endif
+
+#ifndef LCD_PIN_BL
+#define LCD_PIN_BL 21
+#endif
+
+#ifndef LCD_SPI_BAUDRATE
+#define LCD_SPI_BAUDRATE 30000000u
+#endif
+
+#ifndef LCD_PHYSICAL_WIDTH
+#define LCD_PHYSICAL_WIDTH 320
+#endif
+
+#ifndef LCD_PHYSICAL_HEIGHT
+#define LCD_PHYSICAL_HEIGHT 172
+#endif
+
+#ifndef LCD_LOGICAL_WIDTH
+#define LCD_LOGICAL_WIDTH 128
+#endif
+
+#ifndef LCD_LOGICAL_HEIGHT
+#define LCD_LOGICAL_HEIGHT 64
+#endif
 
 #define PIN_SDA  28 //14
 #define PIN_SCL  29 //15
